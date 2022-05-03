@@ -8,6 +8,5 @@ int main() {
 	Automata coffee{};
 	std::cout << coffee.getMenu();
 	std::cout << coffee.work("Latte", 17);
-	system("pause");
 	return 0;
 }
