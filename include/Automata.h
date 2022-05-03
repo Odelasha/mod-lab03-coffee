@@ -1,7 +1,8 @@
-#pragma once
+// Copyright 2020 GHA Test Team
 #include <string>
 #include <vector>
-using namespace std;
+using std::string;
+using std::vector;
 
 enum STATES
 {

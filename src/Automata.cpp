@@ -1,14 +1,14 @@
-#include "Automata.h"
+// Copyright 2020 GHA Test Team
 #include <fstream>
 #include <iostream>
+#include "Automata.h"
+using std::cout;
+using std::endl;
 
-Automata::Automata()
-{
-	ifstream fin{ "coffee.txt" };
-	if (fin.is_open())
-	{
-		while (!fin.eof())
-		{
+Automata::Automata() {
+	std::ifstream fin{ "coffee.txt" };
+	if (fin.is_open()) {
+		while (!fin.eof()) {
 			string str;
 			fin >> str;
 			this->menu.push_back(str);
@@ -19,76 +19,62 @@ Automata::Automata()
 	fin.close();
 }
 
-void Automata::on()
-{
+void Automata::on() {
 	this->state = STATES::WAIT;
 }
 
-void Automata::off()
-{
+void Automata::off() {
 	this->state = STATES::OFF;
 }
 
-void Automata::coin(int coins)
-{
+void Automata::coin(int coins) {
 	this->cash += coins;
 	this->state = STATES::ACCEPT;
 }
 
-string Automata::getMenu()
-{
+string Automata::getMenu() {
 	string str = "";
 	for (size_t i = 0; i < size(this->menu); ++i)
-		str += this->menu[i] + ": " + to_string(this->prices[i]) + "\n";
+		str += this->menu[i] + ": " + std::to_string(this->prices[i]) + "\n";
 	return str;
 }
 
-STATES Automata::getState()
-{
+STATES Automata::getState() {
 	return this->state;
 }
 
-void Automata::choice()
-{
+void Automata::choice() {
 	this->state = STATES::CHECK;
 }
 
-bool Automata::check(string name)
-{
+bool Automata::check(string name) {
 	auto it = find(this->menu.begin(), this->menu.end(), name);
 	auto ind = distance(this->menu.begin(), it);
-	if (this->cash >= this->prices[ind])
-	{
+	if (this->cash >= this->prices[ind]) {
 		this->cash -= this->prices[ind];
 		return true;
 	}
 	return false;
 }
 
-void Automata::cancel()
-{
+void Automata::cancel() {
 	this->state = STATES::WAIT;
 }
 
-void Automata::cook()
-{
+void Automata::cook() {
 	this->state = STATES::COOK;
 }
 
-void Automata::finish()
-{
+void Automata::finish() {
 	this->state = STATES::WAIT;
 }
 
-int Automata::getRest()
-{
+int Automata::getRest() {
 	return this->cash;
 }
 
-void Automata::printState(STATES s)
-{
-	switch (s)
-	{
+void Automata::printState(STATES s) {
+	switch (s) {
 	case STATES::WAIT:
 		cout << "Машина ожидает заказа..." << endl;
 		break;
@@ -109,8 +95,7 @@ void Automata::printState(STATES s)
 	}
 }
 
-int Automata::work(string name, int coins, bool output)
-{
+int Automata::work(string name, int coins, bool output) {
 	if(output)
 		printState(this->getState());
 	on(); 
@@ -124,15 +109,13 @@ int Automata::work(string name, int coins, bool output)
 	choice(); 
 	if (output)
 		printState(this->getState());
-	if (!check(name))
-	{
+	if (!check(name)) {
 		finish(); 
 		if (output)
 			printState(this->getState());
 		return getRest();
 	}
-	else
-	{
+	else {
 		cook(); 
 		if (output)
 			printState(this->getState());
