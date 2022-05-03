@@ -37,9 +37,11 @@ void Automata::choice() {
 }
 
 bool Automata::check(string name) {
-	auto it = std::find(this->menu.begin(), this->menu.end(), name);
-	auto ind = std::distance(this->menu.begin(), it);
-	if (this->cash >= this->prices[ind]) {
+	int ind = -1;
+	for (int i = 0; i < this->menu.size(); ++i)
+		if (this->menu[i] == name)
+			ind = i;
+	if (ind != -1 && this->cash >= this->prices[ind]) {
 		this->cash -= this->prices[ind];
 		return true;
 	}
