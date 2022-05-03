@@ -48,8 +48,8 @@ void Automata::choice() {
 }
 
 bool Automata::check(string name) {
-	auto it = find(this->menu.begin(), this->menu.end(), name);
-	auto ind = distance(this->menu.begin(), it);
+	auto it = std::find(this->menu.begin(), this->menu.end(), name);
+	auto ind = std::distance(this->menu.begin(), it);
 	if (this->cash >= this->prices[ind]) {
 		this->cash -= this->prices[ind];
 		return true;
