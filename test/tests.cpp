@@ -36,7 +36,7 @@ TEST(TestCoffee, TestCancel) {
     a.on();
     a.coin(5);
     a.choice();
-    if(!a.check("Latte"))
+    if (!a.check("Latte"))
         a.cancel();
     EXPECT_TRUE(a.getState() == STATES::WAIT);
 }

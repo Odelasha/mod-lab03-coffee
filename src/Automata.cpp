@@ -67,19 +67,19 @@ int Automata::getRest() {
 void Automata::printState(STATES s) {
     switch (s) {
     case STATES::WAIT:
-        cout << "Машина ожидает заказа..." << endl;
+        cout << "The automate is waiting for an order..." << endl;
         break;
     case STATES::ACCEPT:
-        cout << "Приём денег..." << endl;
+        cout << "Acceptance of money..." << endl;
         break;
     case STATES::CHECK:
-        cout << "Проверка наличности..." << endl;
+        cout << "Cash check..." << endl;
         break;
     case STATES::COOK:
-        cout << "Приготовление напитка..." << endl;
+        cout << "Preparing a drink..." << endl;
         break;
     case STATES::OFF:
-        cout << "Аппарат выключен." << endl;
+        cout << "The automate is turned off." << endl;
         break;
     default:
         break;
@@ -87,36 +87,33 @@ void Automata::printState(STATES s) {
 }
 
 int Automata::work(string name, int coins, bool output) {
-    if(output)
-        printState(this->getState());
-    on(); 
     if (output)
         printState(this->getState());
-    
-    coin(coins); 
+    on();
     if (output)
         printState(this->getState());
-
-    choice(); 
+    coin(coins);
+    if (output)
+        printState(this->getState());
+    choice();
     if (output)
         printState(this->getState());
     if (!check(name)) {
-        finish(); 
+        finish();
         if (output)
             printState(this->getState());
         return getRest();
     }
     else {
-        cook(); 
+        cook();
         if (output)
             printState(this->getState());
     }
-    finish(); 
+    finish();
     if (output)
         printState(this->getState());
-    off(); 
+    off();
     if (output)
         printState(this->getState());
     return getRest();
 }
-
