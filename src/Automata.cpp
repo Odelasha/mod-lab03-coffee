@@ -103,8 +103,7 @@ int Automata::work(string name, int coins, bool output) {
         if (output)
             printState(this->getState());
         return getRest();
-    }
-    else {
+    } else {
         cook();
         if (output)
             printState(this->getState());
@@ -117,3 +116,4 @@ int Automata::work(string name, int coins, bool output) {
         printState(this->getState());
     return getRest();
 }
+
