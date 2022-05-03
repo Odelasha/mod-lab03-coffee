@@ -4,9 +4,9 @@
 #include "Automata.h"
 
 int main() {
-	setlocale(LC_ALL, "rus");
-	Automata coffee{};
-	std::cout << coffee.getMenu();
-	std::cout << coffee.work("Latte", 17);
-	return 0;
+    setlocale(LC_ALL, "rus");
+    Automata coffee{};
+    std::cout << coffee.getMenu();
+    std::cout << coffee.work("Latte", 17);
+    return 0;
 }

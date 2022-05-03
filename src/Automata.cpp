@@ -9,114 +9,114 @@ Automata::Automata() {
 }
 
 void Automata::on() {
-	this->state = STATES::WAIT;
+    this->state = STATES::WAIT;
 }
 
 void Automata::off() {
-	this->state = STATES::OFF;
+    this->state = STATES::OFF;
 }
 
 void Automata::coin(int coins) {
-	this->cash += coins;
-	this->state = STATES::ACCEPT;
+    this->cash += coins;
+    this->state = STATES::ACCEPT;
 }
 
 string Automata::getMenu() {
-	string str = "";
-	for (size_t i = 0; i < size(this->menu); ++i)
-		str += this->menu[i] + ": " + std::to_string(this->prices[i]) + "\n";
-	return str;
+    string str = "";
+    for (size_t i = 0; i < size(this->menu); ++i)
+        str += this->menu[i] + ": " + std::to_string(this->prices[i]) + "\n";
+    return str;
 }
 
 STATES Automata::getState() {
-	return this->state;
+    return this->state;
 }
 
 void Automata::choice() {
-	this->state = STATES::CHECK;
+    this->state = STATES::CHECK;
 }
 
 bool Automata::check(string name) {
-	int ind = -1;
-	for (int i = 0; i < this->menu.size(); ++i)
-		if (this->menu[i] == name)
-			ind = i;
-	if (ind != -1 && this->cash >= this->prices[ind]) {
-		this->cash -= this->prices[ind];
-		return true;
-	}
-	return false;
+    int ind = -1;
+    for (int i = 0; i < this->menu.size(); ++i)
+        if (this->menu[i] == name)
+            ind = i;
+    if (ind != -1 && this->cash >= this->prices[ind]) {
+        this->cash -= this->prices[ind];
+        return true;
+    }
+    return false;
 }
 
 void Automata::cancel() {
-	this->state = STATES::WAIT;
+    this->state = STATES::WAIT;
 }
 
 void Automata::cook() {
-	this->state = STATES::COOK;
+    this->state = STATES::COOK;
 }
 
 void Automata::finish() {
-	this->state = STATES::WAIT;
+    this->state = STATES::WAIT;
 }
 
 int Automata::getRest() {
-	return this->cash;
+    return this->cash;
 }
 
 void Automata::printState(STATES s) {
-	switch (s) {
-	case STATES::WAIT:
-		cout << "Машина ожидает заказа..." << endl;
-		break;
-	case STATES::ACCEPT:
-		cout << "Приём денег..." << endl;
-		break;
-	case STATES::CHECK:
-		cout << "Проверка наличности..." << endl;
-		break;
-	case STATES::COOK:
-		cout << "Приготовление напитка..." << endl;
-		break;
-	case STATES::OFF:
-		cout << "Аппарат выключен." << endl;
-		break;
-	default:
-		break;
-	}
+    switch (s) {
+    case STATES::WAIT:
+        cout << "Машина ожидает заказа..." << endl;
+        break;
+    case STATES::ACCEPT:
+        cout << "Приём денег..." << endl;
+        break;
+    case STATES::CHECK:
+        cout << "Проверка наличности..." << endl;
+        break;
+    case STATES::COOK:
+        cout << "Приготовление напитка..." << endl;
+        break;
+    case STATES::OFF:
+        cout << "Аппарат выключен." << endl;
+        break;
+    default:
+        break;
+    }
 }
 
 int Automata::work(string name, int coins, bool output) {
-	if(output)
-		printState(this->getState());
-	on(); 
-	if (output)
-		printState(this->getState());
-	
-	coin(coins); 
-	if (output)
-		printState(this->getState());
+    if(output)
+        printState(this->getState());
+    on(); 
+    if (output)
+        printState(this->getState());
+    
+    coin(coins); 
+    if (output)
+        printState(this->getState());
 
-	choice(); 
-	if (output)
-		printState(this->getState());
-	if (!check(name)) {
-		finish(); 
-		if (output)
-			printState(this->getState());
-		return getRest();
-	}
-	else {
-		cook(); 
-		if (output)
-			printState(this->getState());
-	}
-	finish(); 
-	if (output)
-		printState(this->getState());
-	off(); 
-	if (output)
-		printState(this->getState());
-	return getRest();
+    choice(); 
+    if (output)
+        printState(this->getState());
+    if (!check(name)) {
+        finish(); 
+        if (output)
+            printState(this->getState());
+        return getRest();
+    }
+    else {
+        cook(); 
+        if (output)
+            printState(this->getState());
+    }
+    finish(); 
+    if (output)
+        printState(this->getState());
+    off(); 
+    if (output)
+        printState(this->getState());
+    return getRest();
 }
 
