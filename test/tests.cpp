@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include "Automata.h"
 
-TTEST(TestCoffee, TestOn) {
+TEST(TestCoffee, TestOn) {
 	Automata a { };
 	a.on();
 	EXPECT_TRUE(a.getState() == STATES::WAIT);
