@@ -1,3 +1,0 @@
-Latte 10
-Cappuccino 12
-Espresso 15

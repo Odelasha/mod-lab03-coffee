@@ -4,8 +4,7 @@
 using std::string;
 using std::vector;
 
-enum STATES
-{
+enum STATES {
 	OFF,
 	WAIT,
 	ACCEPT,
@@ -13,12 +12,11 @@ enum STATES
 	COOK
 };
 
-class Automata
-{
+class Automata {
 private:
 	int cash = 0;     // текущая сумма
-	vector<string> menu; // названия напитков 
-	vector<int> prices;  // стоимости напитков
+	vector<string> menu { "Latte", "Cappuccino", "Espresso" }; // названия напитков 
+	vector<int> prices { 10, 12, 15 };  // стоимости напитков
 	STATES state = STATES::OFF; // текущие состояние автомата
 
 public:

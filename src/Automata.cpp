@@ -6,17 +6,6 @@ using std::cout;
 using std::endl;
 
 Automata::Automata() {
-	std::ifstream fin{ "coffee.txt" };
-	if (fin.is_open()) {
-		while (!fin.eof()) {
-			string str;
-			fin >> str;
-			this->menu.push_back(str);
-			fin >> str;
-			this->prices.push_back(stoi(str));
-		}
-	}
-	fin.close();
 }
 
 void Automata::on() {
@@ -128,3 +117,4 @@ int Automata::work(string name, int coins, bool output) {
 		printState(this->getState());
 	return getRest();
 }
+
